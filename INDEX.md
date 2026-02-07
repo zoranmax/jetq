@@ -1,12 +1,12 @@
-# PLINQ - Python LINQ Implementation
+# jetq - Python LINQ Implementation
 
-Welcome to PLINQ! This is a comprehensive Python implementation of C# LINQ (Language Integrated Query).
+Welcome to jetq! This is a comprehensive Python implementation of C# LINQ (Language Integrated Query).
 
 ## 📁 Project Structure
 
 ### Core Implementation
 ```
-plinq/
+jetq/
 ├── __init__.py          - Package initialization and exports
 ├── queryable.py         - Main Queryable class with 50+ operators
 ├── query_provider.py    - Query provider implementation
@@ -38,7 +38,7 @@ plinq/
 
 ### Basic Usage
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 # Simple filtering and projection
 result = Queryable([1, 2, 3, 4, 5]) \
@@ -108,7 +108,7 @@ python validate.py
 ### For Deep Dive
 1. **API.md** - Complete documentation for every operator
 2. **PROJECT_SUMMARY.md** - Technical details and architecture
-3. **plinq/queryable.py** - Source code with detailed docstrings
+3. **jetq/queryable.py** - Source code with detailed docstrings
 
 ### For Contributing
 1. **CONTRIBUTING.md** - How to contribute
@@ -209,7 +209,7 @@ result = Queryable(customers).join(
 
 ## 🔄 Differences from C# LINQ
 
-| Aspect | C# LINQ | PLINQ |
+| Aspect | C# LINQ | jetq |
 |--------|---------|-------|
 | Method Names | `PascalCase` | `snake_case` |
 | Except | `Except()` | `except_()` |
@@ -226,7 +226,7 @@ result = Queryable(customers).join(
 
 ### Learning the Details
 - Read **API.md** for comprehensive documentation
-- Browse **plinq/queryable.py** for source code
+- Browse **jetq/queryable.py** for source code
 - Study **tests.py** for usage patterns
 
 ### Contributing
@@ -253,14 +253,14 @@ result = Queryable(customers).join(
 
 ### From Source
 ```bash
-cd c:\repos\plinq
+cd c:\repos\jetq
 pip install -e .
 ```
 
 ### As a Package
 Once published to PyPI:
 ```bash
-pip install plinq
+pip install jetq
 ```
 
 ## 🤝 Contributing
@@ -293,7 +293,7 @@ For issues, questions, or suggestions:
 ### Code Examples
 - **examples.py** - 10 practical examples
 - **tests.py** - 60+ test cases
-- **plinq/queryable.py** - Documented source code
+- **jetq/queryable.py** - Documented source code
 
 ### Guides
 - **CONTRIBUTING.md** - How to contribute

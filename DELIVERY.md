@@ -1,4 +1,4 @@
-# PLINQ - Project Delivery Summary
+# jetq - Project Delivery Summary
 
 ## 🎉 Delivered: A Complete Python LINQ Implementation
 
@@ -84,10 +84,10 @@ Documentation:             Complete
 ## 🗂️ File Structure
 
 ```
-c:\repos\plinq/
+c:\repos\jetq/
 │
 ├── 📦 Core Package
-│   └── plinq/
+│   └── jetq/
 │       ├── __init__.py              ✅ Package exports
 │       ├── queryable.py             ✅ Main class (1000+ lines)
 │       ├── query_provider.py        ✅ Provider pattern
@@ -170,13 +170,13 @@ c:\repos\plinq/
 
 ### Installation
 ```bash
-cd c:\repos\plinq
+cd c:\repos\jetq
 pip install -e .
 ```
 
 ### Import
 ```python
-from plinq import Queryable
+from jetq import Queryable
 ```
 
 ### Use
@@ -380,7 +380,7 @@ result = Queryable(customers).group_join(
 ### What You Can Do Right Now
 
 1. ✅ **Install** - `pip install -e .`
-2. ✅ **Import** - `from plinq import Queryable`
+2. ✅ **Import** - `from jetq import Queryable`
 3. ✅ **Query** - Build fluent queries
 4. ✅ **Learn** - Read the documentation
 5. ✅ **Contribute** - Extend with custom operators
@@ -434,9 +434,9 @@ result = Queryable(customers).group_join(
 ## 🎓 Start Here
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
-# Your first PLINQ query!
+# Your first jetq query!
 result = Queryable([1, 2, 3, 4, 5]) \
     .where(lambda x: x > 2) \
     .select(lambda x: x * 2) \
@@ -448,7 +448,7 @@ print(result)  # ✅ Works!
 
 ---
 
-**Congratulations! You now have PLINQ - Python LINQ! 🎉**
+**Congratulations! You now have jetq - Python LINQ! 🎉**
 
 **Version:** 0.1.0  
 **Status:** Production Ready  

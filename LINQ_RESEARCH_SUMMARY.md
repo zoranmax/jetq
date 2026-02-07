@@ -384,7 +384,7 @@ Terminal operators that force evaluation:
 ### Architecture Recommendation
 
 ```
-plinq/
+jetq/
   ├── queryable.py          # Base Queryable class and protocol
   ├── enumerable.py         # Enumerable (functions for iterables)
   ├── operators/
@@ -408,7 +408,7 @@ plinq/
 
 ## 5. SUMMARY OF DIFFERENCES: LINQ vs Python Implementation
 
-| Aspect | C# LINQ | Python PLINQ |
+| Aspect | C# LINQ | Python jetq |
 |--------|---------|---------------|
 | Type Safety | Compile-time | Runtime hints only |
 | Extension Methods | Built-in language feature | Module functions or class methods |

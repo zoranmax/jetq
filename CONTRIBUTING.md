@@ -1,6 +1,6 @@
-# Contributing to PLINQ
+# Contributing to jetq
 
-Thank you for your interest in contributing to PLINQ! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to jetq! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 
@@ -18,8 +18,8 @@ Please be respectful and constructive in all interactions with other contributor
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/plinq.git
-cd plinq
+git clone https://github.com/yourusername/jetq.git
+cd jetq
 ```
 
 2. Create a virtual environment:
@@ -43,7 +43,7 @@ pip install -e .
 pytest tests.py
 
 # Run with coverage
-pytest tests.py --cov=plinq
+pytest tests.py --cov=jetq
 
 # Run specific test
 pytest tests.py::TestFiltering::test_where
@@ -55,16 +55,16 @@ We follow PEP 8 conventions. Use the following tools:
 
 ```bash
 # Format code
-black plinq/
+black jetq/
 
 # Check style
-flake8 plinq/
+flake8 jetq/
 
 # Sort imports
-isort plinq/
+isort jetq/
 
 # Type checking
-mypy plinq/
+mypy jetq/
 ```
 
 ### Documentation
@@ -84,7 +84,7 @@ git checkout -b feature/your-feature-name
 
 ### Implementing New Operators
 
-1. Add the operator method to the `Queryable` class in `plinq/queryable.py`
+1. Add the operator method to the `Queryable` class in `jetq/queryable.py`
 2. Write comprehensive docstring with examples
 3. Add unit tests in `tests.py`
 4. Update `API.md` documentation
@@ -219,7 +219,7 @@ All submissions require review. We look for:
 
 ## License
 
-By contributing to PLINQ, you agree that your contributions will be licensed under the MIT License.
+By contributing to jetq, you agree that your contributions will be licensed under the MIT License.
 
 ## Recognition
 

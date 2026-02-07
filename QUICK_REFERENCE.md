@@ -1,15 +1,15 @@
-# PLINQ Quick Reference
+# jetq Quick Reference
 
 ## Installation
 
 ```bash
-pip install plinq
+pip install jetq
 ```
 
 ## Import
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 ```
 
 ## Basic Syntax
@@ -179,7 +179,7 @@ Queryable(data).filter(...).map(...).sort(...).take(...).to_list()
 Full type hints for IDE support:
 ```python
 from typing import List
-from plinq import Queryable
+from jetq import Queryable
 
 numbers: Queryable[int] = Queryable([1, 2, 3])
 result: List[int] = numbers.where(lambda x: x > 1).to_list()
@@ -187,7 +187,7 @@ result: List[int] = numbers.where(lambda x: x > 1).to_list()
 
 ## Differences from C# LINQ
 
-| C# | Python (PLINQ) |
+| C# | Python (jetq) |
 |----|----------------|
 | `.Where()` | `.where()` |
 | `.Select()` | `.select()` |

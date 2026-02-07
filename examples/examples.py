@@ -1,6 +1,6 @@
-"""Example usage of PLINQ."""
+"""Example usage of jetq."""
 
-from plinq import Queryable
+from jetq import Queryable
 
 
 def example_basic_filtering():

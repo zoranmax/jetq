@@ -1,4 +1,4 @@
-# PLINQ - Python LINQ Implementation - Complete Summary
+# jetq - Python LINQ Implementation - Complete Summary
 
 ## 🎉 Project Completed Successfully!
 
@@ -10,7 +10,7 @@ You now have a **complete, production-ready Python implementation of C# LINQ** w
 
 ### Core Implementation (2000+ lines of code)
 
-#### Package Files (`plinq/`)
+#### Package Files (`jetq/`)
 1. **`__init__.py`** - Package initialization and exports
 2. **`queryable.py`** - Main Queryable class with 42+ operators (1000+ lines)
 3. **`query_provider.py`** - Query provider implementation
@@ -156,7 +156,7 @@ You now have a **complete, production-ready Python implementation of C# LINQ** w
 
 ### Simple Query
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 result = Queryable([1, 2, 3, 4, 5]) \
     .where(lambda x: x > 2) \
@@ -223,7 +223,7 @@ result = Queryable(customers).join(
 ### Learning Resources
 - **examples.py** - 10 practical examples
 - **tests.py** - 60+ test cases showing usage
-- **plinq/queryable.py** - Detailed docstrings
+- **jetq/queryable.py** - Detailed docstrings
 
 ### Getting Started
 - **INDEX.md** - Navigation guide
@@ -283,7 +283,7 @@ result = Queryable(customers).join(
 
 ## 🔄 Differences from C# LINQ
 
-| Aspect | C# LINQ | PLINQ |
+| Aspect | C# LINQ | jetq |
 |--------|---------|-------|
 | Method Names | `Where()` | `where()` |
 | Type System | Explicit types | Type hints |
@@ -298,7 +298,7 @@ result = Queryable(customers).join(
 
 ### 1. **Get Started**
 ```bash
-cd c:\repos\plinq
+cd c:\repos\jetq
 pip install -e .
 ```
 
@@ -319,9 +319,9 @@ python validate.py
 - Study **examples.py** for practical patterns
 
 ### 5. **Explore the Code**
-- **plinq/queryable.py** - Main implementation
+- **jetq/queryable.py** - Main implementation
 - **tests.py** - Test cases
-- **plinq/types.py** - Type definitions
+- **jetq/types.py** - Type definitions
 
 ---
 
@@ -347,8 +347,8 @@ python validate.py
 ## 📁 File Structure
 
 ```
-c:\repos\plinq/
-├── plinq/
+c:\repos\jetq/
+├── jetq/
 │   ├── __init__.py              # Package exports
 │   ├── queryable.py             # Main Queryable class (1000+ lines)
 │   ├── query_provider.py        # Provider implementation
@@ -423,20 +423,20 @@ c:\repos\plinq/
 
 ## 🎉 Conclusion
 
-**PLINQ is a complete, well-documented, thoroughly tested Python implementation of C# LINQ!**
+**jetq is a complete, well-documented, thoroughly tested Python implementation of C# LINQ!**
 
 You can now:
-- ✅ Use PLINQ for querying in-memory collections
+- ✅ Use jetq for querying in-memory collections
 - ✅ Chain operators for complex queries
 - ✅ Leverage deferred execution for efficiency
 - ✅ Extend with custom operators and providers
 - ✅ Learn LINQ concepts in Python
 - ✅ Use it in production code
 
-**Start using PLINQ today!**
+**Start using jetq today!**
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 result = Queryable(your_data) \
     .where(condition) \

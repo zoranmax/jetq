@@ -1,4 +1,4 @@
-# PLINQ Features Checklist
+# jetq Features Checklist
 
 ## ✅ Implemented Features
 
@@ -196,7 +196,7 @@
 
 ## ✨ Highlights
 
-### What Makes PLINQ Special
+### What Makes jetq Special
 1. **Complete LINQ Implementation** - 42+ operators fully implemented
 2. **Pythonic Design** - Uses snake_case and Python conventions
 3. **Comprehensive Documentation** - Over 1500 lines of detailed docs
@@ -241,4 +241,4 @@
 
 ---
 
-**PLINQ is production-ready for in-memory LINQ operations!**
+**jetq is production-ready for in-memory LINQ operations!**

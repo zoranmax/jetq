@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Quick validation script for PLINQ."""
+"""Quick validation script for jetq."""
 
 import sys
 sys.path.insert(0, '.')
 
-from plinq import Queryable
+from jetq import Queryable
 
-print("Testing PLINQ Implementation")
+print("Testing jetq Implementation")
 print("=" * 60)
 
 # Test 1: Basic filtering
@@ -87,4 +87,4 @@ print("✓ Complex queries work")
 print("\n" + "=" * 60)
 print("All tests passed! ✓")
 print("=" * 60)
-print("\nPLINQ is working correctly!")
+print("\njetq is working correctly!")

@@ -1,4 +1,4 @@
-# 🎉 PLINQ - Project Complete!
+# 🎉 jetq - Project Complete!
 
 ## ✨ What You've Got
 
@@ -17,9 +17,9 @@ A **complete, production-ready Python LINQ implementation** with:
 ## 📚 The Complete Package
 
 ```
-📦 PLINQ Project
+📦 jetq Project
 │
-├── 📂 plinq/                    # Main Package (2000+ lines)
+├── 📂 jetq/                    # Main Package (2000+ lines)
 │   ├── __init__.py              # Exports
 │   ├── queryable.py             # 42+ Operators (1000+ lines)
 │   ├── query_provider.py        # Query execution
@@ -77,13 +77,13 @@ Total: 42 Operators │
 
 ### Install
 ```bash
-cd c:\repos\plinq
+cd c:\repos\jetq
 pip install -e .
 ```
 
 ### Use
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 result = Queryable([1, 2, 3, 4, 5]) \
     .where(lambda x: x > 2) \
@@ -251,7 +251,7 @@ var result = data
 ```
 
 ```python
-# Python with PLINQ
+# Python with jetq
 result = Queryable(data) \
     .where(lambda x: x > 2) \
     .select(lambda x: x * 2) \
@@ -289,7 +289,7 @@ result = Queryable(data) \
 
 ---
 
-## 🎁 What You Can Do With PLINQ
+## 🎁 What You Can Do With jetq
 
 ✅ Filter and transform collections  
 ✅ Group and aggregate data  
@@ -313,7 +313,7 @@ pip install -e .
 
 ### Step 2: Import
 ```python
-from plinq import Queryable
+from jetq import Queryable
 ```
 
 ### Step 3: Use
@@ -427,7 +427,7 @@ result = Queryable(data).where(...).select(...).to_list()
 ## 🎓 Start Learning
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 # This is all you need to get started!
 result = Queryable([1, 2, 3, 4, 5]) \

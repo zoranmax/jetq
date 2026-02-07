@@ -1,8 +1,8 @@
-# PLINQ API Documentation
+# jetq API Documentation
 
 ## Overview
 
-PLINQ (Python LINQ) is a comprehensive implementation of .NET's Language Integrated Query (LINQ) in Python. It provides a fluent, chainable API for querying and transforming data collections.
+jetq (Python LINQ) is a comprehensive implementation of .NET's Language Integrated Query (LINQ) in Python. It provides a fluent, chainable API for querying and transforming data collections.
 
 ## Core Classes
 
@@ -11,7 +11,7 @@ PLINQ (Python LINQ) is a comprehensive implementation of .NET's Language Integra
 The main class for building and executing LINQ queries. All query operators are methods on this class.
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 # Create a queryable from any iterable
 query = Queryable([1, 2, 3, 4, 5])
@@ -478,10 +478,10 @@ result = Queryable(data) \
 
 ### Type Hints
 
-PLINQ includes full type hints for better IDE support:
+jetq includes full type hints for better IDE support:
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 numbers: Queryable[int] = Queryable([1, 2, 3])
 result: list[int] = numbers.where(lambda x: x > 1).to_list()
@@ -554,7 +554,7 @@ result = Queryable(customers).group_join(
 
 ## Contributing
 
-To contribute to PLINQ, please:
+To contribute to jetq, please:
 
 1. Fork the repository
 2. Create a feature branch
@@ -564,4 +564,4 @@ To contribute to PLINQ, please:
 
 ## License
 
-PLINQ is released under the MIT License. See LICENSE file for details.
+jetq is released under the MIT License. See LICENSE file for details.

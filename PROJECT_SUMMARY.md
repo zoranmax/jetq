@@ -1,14 +1,14 @@
-# PLINQ Project Summary
+# jetq Project Summary
 
 ## Overview
 
-PLINQ is a comprehensive Python implementation of C# LINQ (Language Integrated Query), providing a powerful and fluent API for querying and transforming data collections.
+jetq is a comprehensive Python implementation of C# LINQ (Language Integrated Query), providing a powerful and fluent API for querying and transforming data collections.
 
 ## Project Structure
 
 ```
-c:\repos\plinq/
-├── plinq/
+c:\repos\jetq/
+├── jetq/
 │   ├── __init__.py              # Package initialization and exports
 │   ├── queryable.py             # Main Queryable class (1000+ lines)
 │   ├── query_provider.py        # Query provider implementation
@@ -100,7 +100,7 @@ c:\repos\plinq/
 
 ### Basic Filtering and Projection
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 result = Queryable([1, 2, 3, 4, 5]) \
     .where(lambda x: x > 2) \
@@ -202,7 +202,7 @@ Total: **60+ test methods** covering all major functionality
 
 ## Differences from C# LINQ
 
-| Aspect | C# LINQ | PLINQ |
+| Aspect | C# LINQ | jetq |
 |--------|---------|-------|
 | Method Names | PascalCase | snake_case |
 | Except Keyword | Except | except_ |
@@ -246,7 +246,7 @@ pytest tests.py -v
 
 ## Conclusion
 
-PLINQ successfully brings the power and elegance of C# LINQ to Python, providing developers with a familiar, fluent API for querying and manipulating data collections. The implementation is comprehensive, well-tested, and thoroughly documented.
+jetq successfully brings the power and elegance of C# LINQ to Python, providing developers with a familiar, fluent API for querying and manipulating data collections. The implementation is comprehensive, well-tested, and thoroughly documented.
 
 The project demonstrates:
 - Deep understanding of LINQ architecture

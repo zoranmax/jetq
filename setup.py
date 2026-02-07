@@ -1,4 +1,4 @@
-"""Setup configuration for PLINQ."""
+"""Setup configuration for jetq."""
 
 from setuptools import setup, find_packages
 
@@ -6,13 +6,13 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="plinq",
+    name="jetq",
     version="0.1.0",
-    author="PLINQ Contributors",
-    description="Python LINQ - Language Integrated Query for Python",
+    author="Zoran Maksimovic",
+    description="jetq - language integrated query for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/plinq",
+    url="https://github.com/zoranmax/jetq",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -27,5 +27,5 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     python_requires=">=3.8",
-    keywords="linq query data processing filtering sorting grouping",
+    keywords="jetq query data processing filtering sorting grouping",
 )

@@ -1,7 +1,7 @@
-"""Unit tests for PLINQ."""
+"""Unit tests for jetq."""
 
 import unittest
-from plinq import Queryable, GroupingResult
+from jetq import Queryable, GroupingResult
 
 
 class TestFiltering(unittest.TestCase):

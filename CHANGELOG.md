@@ -1,6 +1,6 @@
 # CHANGELOG
 
-All notable changes to PLINQ will be documented in this file.
+All notable changes to jetq will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -72,9 +72,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `to_tuple()` - Convert to tuple
 
 ### Project Structure
-- Core queryable implementation in `plinq/queryable.py`
-- Type definitions in `plinq/types.py`
-- Query provider in `plinq/query_provider.py`
+- Core queryable implementation in `jetq/queryable.py`
+- Type definitions in `jetq/types.py`
+- Query provider in `jetq/query_provider.py`
 - Comprehensive unit tests in `tests.py`
 - Extensive examples in `examples.py`
 - Full API documentation in `API.md`
@@ -116,7 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### From C# LINQ
 
-| C# LINQ | PLINQ |
+| C# LINQ | jetq |
 |---------|-------|
 | `Where()` | `where()` |
 | `Select()` | `select()` |
@@ -151,8 +151,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Contributors
 
-- Initial implementation: PLINQ Contributors
+- Initial implementation: jetq Contributors
 
 ## License
 
-PLINQ is released under the MIT License.
+jetq is released under the MIT License.

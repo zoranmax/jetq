@@ -1,10 +1,10 @@
-# PLINQ Project Manifest
+# jetq Project Manifest
 
 ## Project Files (21 total)
 
 ### 📦 Python Package Files (4 files)
 ```
-plinq/
+jetq/
 ├── __init__.py              (51 lines) - Package initialization and exports
 ├── queryable.py             (1000+ lines) - Main Queryable class with 42+ operators
 ├── query_provider.py        (26 lines) - Query provider implementation  
@@ -76,12 +76,12 @@ plinq/
 
 ### Core Implementation
 
-#### `plinq/__init__.py`
+#### `jetq/__init__.py`
 - Package initialization
 - Exports: Queryable, OrderedQueryable, QueryProvider, GroupingResult
 - Version: 0.1.0
 
-#### `plinq/queryable.py`
+#### `jetq/queryable.py`
 - **Queryable[T]** class (main class)
   - Filtering (6 operators)
   - Projection (3 operators)
@@ -96,12 +96,12 @@ plinq/
 - **OrderedQueryable[T]** class for secondary sorting
 - Full type hints and docstrings
 
-#### `plinq/query_provider.py`
+#### `jetq/query_provider.py`
 - QueryProvider class
 - create_query() method
 - execute_query() method
 
-#### `plinq/types.py`
+#### `jetq/types.py`
 - Type aliases and definitions
 - OrderingDirection class
 - GroupingResult[TKey, T] class
@@ -227,7 +227,7 @@ plinq/
 ### Configuration Files
 
 #### `setup.py`
-- Package name: plinq
+- Package name: jetq
 - Version: 0.1.0
 - PyPI metadata
 - Python version requirements (3.8+)
@@ -271,7 +271,7 @@ plinq/
 ### Learning Deep
 1. Read **API.md** for complete documentation
 2. Study **tests.py** for test cases
-3. Explore **plinq/queryable.py** source code
+3. Explore **jetq/queryable.py** source code
 
 ### Contributing
 1. Review **CONTRIBUTING.md**
@@ -289,7 +289,7 @@ plinq/
 ## ✅ All Files Present and Accounted For
 
 ### Location
-`c:\repos\plinq\`
+`c:\repos\jetq\`
 
 ### Verification
 - ✅ 4 Python package files
@@ -305,13 +305,13 @@ plinq/
 
 ### From Source
 ```bash
-cd c:\repos\plinq
+cd c:\repos\jetq
 pip install -e .
 ```
 
 ### Import
 ```python
-from plinq import Queryable
+from jetq import Queryable
 ```
 
 ### Verify Installation
@@ -343,9 +343,9 @@ python validate.py
    - Check QUICK_REFERENCE.md
    - Read API.md for details
 
-5. **Start using PLINQ!**
+5. **Start using jetq!**
    ```python
-   from plinq import Queryable
+   from jetq import Queryable
    result = Queryable([1,2,3]).where(lambda x: x > 1).to_list()
    ```
 

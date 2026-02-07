@@ -1,4 +1,4 @@
-"""Type definitions and utilities for PLINQ."""
+"""Type definitions and utilities for jetq."""
 
 from typing import (
     TypeVar, Generic, Callable, Iterable, Iterator, 

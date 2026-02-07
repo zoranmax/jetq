@@ -1,4 +1,4 @@
-"""Query provider implementation for PLINQ."""
+"""Query provider implementation for jetq."""
 
 from typing import Iterable, Iterator, TypeVar, Any
 from abc import ABC, abstractmethod

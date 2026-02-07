@@ -1,10 +1,10 @@
-# PLINQ - Python LINQ
+# jetq - Python LINQ
 
 A Python implementation of .NET's Language Integrated Query (LINQ), providing a functional, fluent API for querying and manipulating collections.
 
 ## Overview
 
-PLINQ brings the power and elegance of C# LINQ to Python, allowing you to write expressive, chainable queries over any iterable collection.
+jetq brings the power and elegance of C# LINQ to Python, allowing you to write expressive, chainable queries over any iterable collection.
 
 ### Key Features
 
@@ -17,13 +17,13 @@ PLINQ brings the power and elegance of C# LINQ to Python, allowing you to write 
 ## Installation
 
 ```bash
-pip install plinq
+pip install jetq
 ```
 
 ## Quick Start
 
 ```python
-from plinq import Queryable
+from jetq import Queryable
 
 # Basic filtering and projection
 numbers = Queryable([1, 2, 3, 4, 5])
@@ -115,7 +115,7 @@ result = query.to_list()  # Executed here
 ## Architecture
 
 ```
-plinq/
+jetq/
 ├── __init__.py           # Package initialization
 ├── queryable.py          # Main Queryable class
 ├── enumerable.py         # Extension methods for built-in types
