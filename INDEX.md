@@ -21,7 +21,9 @@ jetq/
 
 ### Implementation Files
 - **examples.py** - 10 runnable examples demonstrating all features
-- **tests.py** - 60+ comprehensive unit tests
+- **test_queryable.py** - 50+ comprehensive pytest tests
+- **test_restful.py** - Integration tests with real APIs
+- **test_csv_large_dataset.py** - Performance tests with large datasets
 - **validate.py** - Quick validation script
 
 ### Configuration Files
@@ -60,7 +62,13 @@ python examples.py
 
 ### Running Tests
 ```bash
-python tests.py
+# Using task runner (recommended)
+task test
+
+# Using pytest directly
+pytest tests/
+
+# Quick validation
 python validate.py
 ```
 
@@ -116,25 +124,30 @@ python validate.py
 
 ### For Learning
 1. **examples.py** - Practical examples
-2. **tests.py** - Test cases showing operator usage
+2. **test_queryable.py** - Test cases showing operator usage
 3. **validate.py** - Simple validation checks
 
 ## 🧪 Testing
 
 ### Test Coverage
-- **60+ test methods** across 12 test classes
-- Tests for filtering, projection, ordering, grouping, joining, aggregation, set operations, element access, quantifiers, conversion, and complex queries
+- **80+ test methods** across multiple test files
+- Unit tests for all operators (test_queryable.py)
+- Integration tests with real APIs (test_restful.py)
+- Performance tests with large datasets (test_csv_large_dataset.py)
 
 ### Running Tests
 ```bash
-# Run all tests
-python tests.py
+# Run all tests with task runner (recommended)
+task test
 
-# Run with unittest discovery
-python -m unittest discover
+# Run all tests with pytest
+pytest tests/ -v
 
-# Run with pytest (if installed)
-pytest tests.py -v
+# Run with coverage
+pytest tests/ --cov=jetq --cov-report=term-missing
+
+# Run specific test file
+pytest tests/test_queryable.py -v
 ```
 
 ### Quick Validation
@@ -227,7 +240,7 @@ result = Queryable(customers).join(
 ### Learning the Details
 - Read **API.md** for comprehensive documentation
 - Browse **jetq/queryable.py** for source code
-- Study **tests.py** for usage patterns
+- Study **test_queryable.py** for usage patterns
 
 ### Contributing
 - Review **CONTRIBUTING.md** for guidelines
@@ -280,7 +293,7 @@ MIT License - See LICENSE file for details
 For issues, questions, or suggestions:
 1. Check **API.md** for documentation
 2. Review **examples.py** for usage patterns
-3. Look at **tests.py** for implementation examples
+3. Look at **test_queryable.py** for implementation examples
 4. Open an issue on GitHub
 
 ## 🎓 Learning Resources
@@ -292,7 +305,9 @@ For issues, questions, or suggestions:
 
 ### Code Examples
 - **examples.py** - 10 practical examples
-- **tests.py** - 60+ test cases
+- **test_queryable.py** - 50+ unit test cases
+- **test_restful.py** - 20+ integration test cases
+- **test_csv_large_dataset.py** - 10+ performance test cases
 - **jetq/queryable.py** - Documented source code
 
 ### Guides

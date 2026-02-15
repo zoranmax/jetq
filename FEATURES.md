@@ -87,7 +87,7 @@
 
 ### Examples & Testing
 - [x] 10 example scenarios in examples.py
-- [x] 60+ unit tests in tests.py
+- [x] 80+ comprehensive tests (unit, integration, performance)
 - [x] Quick validation script (validate.py)
 - [x] Real-world example patterns
 

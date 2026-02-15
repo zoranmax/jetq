@@ -243,12 +243,12 @@ diff = Queryable(set_a).except_(set_b).to_list()
 
 - **Full API**: See `API.md`
 - **Examples**: See `examples.py`
-- **Testing**: See `tests.py`
+- **Testing**: See `test_queryable.py`
 - **Contributing**: See `CONTRIBUTING.md`
 
 ## Getting Help
 
 1. Check `API.md` for detailed operator documentation
 2. Review `examples.py` for usage patterns
-3. Look at test cases in `tests.py` for more examples
+3. Look at test cases in `test_queryable.py` for more examples
 4. Open an issue on GitHub for bugs or feature requests

@@ -36,17 +36,38 @@ pip install -e .
 
 ## Development Process
 
+### Task Runner
+
+We use [Task](https://taskfile.dev/) for common development tasks. View all available tasks:
+
+```bash
+task --list
+```
+
+Common tasks:
+```bash
+task format      # Format code with ruff
+task lint        # Run linters (ruff and mypy)
+task test        # Run tests with coverage
+task build       # Build distribution packages
+task all         # Run format, lint, test, and build
+task docker:test # Run tests on all Python versions
+```
+
 ### Running Tests
 
 ```bash
-# Run all tests
+# Using task runner (recommended)
+task test
+
+# Using pytest directly
 pytest ./tests 
 
 # Run with coverage
 pytest ./tests --cov=jetq
 
 # Run specific test
-pytest ./tests/tests.py::TestFiltering::test_where
+pytest ./tests/test_queryable.py::TestFiltering::test_where
 ```
 
 ### Code Style
@@ -54,6 +75,11 @@ pytest ./tests/tests.py::TestFiltering::test_where
 We follow PEP 8 conventions. Use the following tools:
 
 ```bash
+# Using task runner (recommended)
+task format      # Format code and sort imports
+task lint        # Run all linters
+
+# Or use tools directly
 # Format code and sort imports
 ruff format jetq/
 ruff check --fix --select I jetq/
@@ -84,7 +110,7 @@ git checkout -b feature/your-feature-name
 
 1. Add the operator method to the `Queryable` class in `jetq/queryable.py`
 2. Write comprehensive docstring with examples
-3. Add unit tests in `tests.py`
+3. Add unit tests in `test_queryable.py`
 4. Update `API.md` documentation
 5. Add usage example in `examples.py` if appropriate
 
@@ -116,13 +142,13 @@ def your_new_operator(self, parameter: str) -> 'Queryable[T]':
 ### Example Test Implementation
 
 ```python
-class TestYourOperator(unittest.TestCase):
+class TestYourOperator:
     """Test your_new_operator."""
     
     def test_basic_usage(self):
         """Test basic functionality."""
         result = Queryable([...]).your_new_operator('param').to_list()
-        self.assertEqual(result, [...])
+        assert result == [...]
     
     def test_edge_case(self):
         """Test edge case."""
@@ -147,16 +173,17 @@ test: Add tests for complex chained queries
 
 ## Pull Request Process
 
-1. Ensure all tests pass locally (for all python versions)
-2. Update documentation as needed
-3. Add or update tests for new functionality
-4. Fill out the PR template completely
-5. Link any related issues
-6. Request review from maintainers
+1. Ensure all tests pass locally (`task test`)
+2. Optionally test on all Python versions (`task docker:test`)
+3. Update documentation as needed
+4. Add or update tests for new functionality
+5. Fill out the PR template completely
+6. Link any related issues
+7. Request review from maintainers
 
 ### PR Checklist
 
-- [ ] Tests pass locally (`pytest ./tests`)
+- [ ] Tests pass locally (`task test` or `pytest ./tests`)
 - [ ] Code follows style guidelines (`task format`, `task lint`)
 - [ ] Documentation is updated
 - [ ] Examples are provided

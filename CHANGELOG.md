@@ -75,7 +75,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Core queryable implementation in `jetq/queryable.py`
 - Type definitions in `jetq/types.py`
 - Query provider in `jetq/query_provider.py`
-- Comprehensive unit tests in `tests.py`
+- Comprehensive test suite with pytest (unit, integration, performance tests)
 - Extensive examples in `examples.py`
 - Full API documentation in `API.md`
 
