@@ -1,0 +1,90 @@
+services:
+  # Python 3.8 tests
+  test-py38:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.8"
+    image: jetq-test:py38
+    container_name: jetq-test-py38
+    volumes:
+      - .:/app
+    command: pytest -v --tb=short
+    environment:
+      - PYTHON_VERSION=3.8
+
+  # Python 3.9 tests
+  test-py39:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.9"
+    image: jetq-test:py39
+    container_name: jetq-test-py39
+    volumes:
+      - .:/app
+    command: pytest -v --tb=short
+    environment:
+      - PYTHON_VERSION=3.9
+
+  # Python 3.10 tests
+  test-py310:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.10"
+    image: jetq-test:py310
+    container_name: jetq-test-py310
+    volumes:
+      - .:/app
+    command: pytest -v --tb=short
+    environment:
+      - PYTHON_VERSION=3.10
+
+  # Python 3.11 tests
+  test-py311:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.11"
+    image: jetq-test:py311
+    container_name: jetq-test-py311
+    volumes:
+      - .:/app
+    command: pytest -v --tb=short
+    environment:
+      - PYTHON_VERSION=3.11
+
+  # Python 3.12 tests
+  test-py312:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.12"
+    image: jetq-test:py312
+    container_name: jetq-test-py312
+    volumes:
+      - .:/app
+    command: pytest -v --tb=short
+    environment:
+      - PYTHON_VERSION=3.12
+
+  # Python 3.13 tests
+  test-py313:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: "3.13"
+    image: jetq-test:py313
+    container_name: jetq-test-py313
+    volumes:
+      - .:/app
+    command: pytest -v --tb=short
+    environment:
+      - PYTHON_VERSION=3.13
