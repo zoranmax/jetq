@@ -2,7 +2,8 @@
 """Quick validation script for jetq."""
 
 import sys
-sys.path.insert(0, '.')
+
+sys.path.insert(0, ".")
 
 from jetq import Queryable
 
@@ -39,11 +40,11 @@ print("✓ Aggregation works")
 # Test 5: Grouping
 print("5. Testing grouping...")
 data = [
-    {'category': 'A', 'value': 1},
-    {'category': 'B', 'value': 2},
-    {'category': 'A', 'value': 3},
+    {"category": "A", "value": 1},
+    {"category": "B", "value": 2},
+    {"category": "A", "value": 3},
 ]
-result = Queryable(data).group_by(lambda x: x['category']).to_list()
+result = Queryable(data).group_by(lambda x: x["category"]).to_list()
 assert len(result) == 2, f"Expected 2 groups, got {len(result)}"
 print("✓ Grouping works")
 
@@ -58,29 +59,35 @@ print("✓ Set operations work")
 # Test 7: Joining
 print("7. Testing joins...")
 customers = [
-    {'id': 1, 'name': 'Alice'},
-    {'id': 2, 'name': 'Bob'},
+    {"id": 1, "name": "Alice"},
+    {"id": 2, "name": "Bob"},
 ]
 orders = [
-    {'customer_id': 1, 'product': 'Widget'},
-    {'customer_id': 2, 'product': 'Gadget'},
+    {"customer_id": 1, "product": "Widget"},
+    {"customer_id": 2, "product": "Gadget"},
 ]
-result = Queryable(customers).join(
-    orders,
-    lambda c: c['id'],
-    lambda o: o['customer_id'],
-    lambda c, o: f"{c['name']} ordered {o['product']}"
-).to_list()
+result = (
+    Queryable(customers)
+    .join(
+        orders,
+        lambda c: c["id"],
+        lambda o: o["customer_id"],
+        lambda c, o: f"{c['name']} ordered {o['product']}",
+    )
+    .to_list()
+)
 assert len(result) == 2, f"Expected 2 results, got {len(result)}"
 print("✓ Joins work")
 
 # Test 8: Complex query
 print("8. Testing complex chained query...")
-result = Queryable(range(1, 11)) \
-    .where(lambda x: x % 2 == 0) \
-    .select(lambda x: x * 2) \
-    .order_by_descending(lambda x: x) \
+result = (
+    Queryable(range(1, 11))
+    .where(lambda x: x % 2 == 0)
+    .select(lambda x: x * 2)
+    .order_by_descending(lambda x: x)
     .to_list()
+)
 assert result == [20, 16, 12, 8, 4], f"Expected [20, 16, 12, 8, 4], got {result}"
 print("✓ Complex queries work")
 

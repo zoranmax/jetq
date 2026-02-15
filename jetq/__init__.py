@@ -1,7 +1,7 @@
 """jetq - Python LINQ implementation."""
 
-from .queryable import Queryable, OrderedQueryable
 from .query_provider import QueryProvider
+from .queryable import OrderedQueryable, Queryable
 from .types import GroupingResult
 
 __version__ = "0.1.0"

@@ -1,0 +1,6 @@
+{
+"include": ["jetq", "tests"],
+"exclude": [".venv", "examples"],
+"pythonVersion": "3.10",
+"typeCheckingMode": "basic"
+}

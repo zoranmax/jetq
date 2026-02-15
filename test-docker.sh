@@ -58,7 +58,7 @@ EOF
 build_image() {
     local version=$1
     print_info "Building Docker image for Python ${version}..."
-    docker-compose build "test-py${version//./}"
+    docker compose build "test-py${version//./}"
     print_success "Built image for Python ${version}"
 }
 
@@ -69,7 +69,7 @@ run_tests() {
     
     print_info "Running tests on Python ${version}..."
     
-    if docker-compose run --rm "$service_name"; then
+    if docker compose run --rm "$service_name"; then
         print_success "Python ${version} tests passed ✓"
         return 0
     else
@@ -109,7 +109,7 @@ open_shell() {
     local service_name="test-py${version//./}"
     
     print_info "Opening shell in Python ${version} container..."
-    docker-compose run --rm "$service_name" /bin/bash
+    docker compose run --rm "$service_name" /bin/bash
 }
 
 # Function to clean up Docker resources
@@ -117,7 +117,7 @@ cleanup() {
     print_info "Cleaning up Docker resources..."
     
     # Stop and remove containers
-    docker-compose down --remove-orphans
+    docker compose down --remove-orphans
     
     # Remove images
     docker images | grep "jetq-test" | awk '{print $3}' | xargs -r docker rmi -f
@@ -138,8 +138,8 @@ main() {
     fi
     
     # Check if docker-compose is installed
-    if ! command -v docker-compose &> /dev/null; then
-        print_error "docker-compose is not installed. Please install docker-compose first."
+    if ! command -v docker compose &> /dev/null; then
+        print_error "docker compose is not installed. Please install docker compose first."
         exit 1
     fi
     
@@ -192,7 +192,7 @@ main() {
     if [ "$build_flag" = true ]; then
         if [ "$version" = "all" ]; then
             print_info "Building all images..."
-            docker-compose build
+            docker compose build
         else
             build_image "$version"
         fi

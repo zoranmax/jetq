@@ -24,8 +24,8 @@ cd jetq
 
 2. Create a virtual environment:
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python3 -m venv .venv
+source .venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. Install development dependencies:
@@ -40,13 +40,13 @@ pip install -e .
 
 ```bash
 # Run all tests
-pytest tests.py
+pytest ./tests 
 
 # Run with coverage
-pytest tests.py --cov=jetq
+pytest ./tests --cov=jetq
 
 # Run specific test
-pytest tests.py::TestFiltering::test_where
+pytest ./tests/tests.py::TestFiltering::test_where
 ```
 
 ### Code Style
@@ -54,14 +54,12 @@ pytest tests.py::TestFiltering::test_where
 We follow PEP 8 conventions. Use the following tools:
 
 ```bash
-# Format code
-black jetq/
+# Format code and sort imports
+ruff format jetq/
+ruff check --fix --select I jetq/
 
-# Check style
-flake8 jetq/
-
-# Sort imports
-isort jetq/
+# Lint code
+ruff check jetq/
 
 # Type checking
 mypy jetq/
@@ -149,7 +147,7 @@ test: Add tests for complex chained queries
 
 ## Pull Request Process
 
-1. Ensure all tests pass locally
+1. Ensure all tests pass locally (for all python versions)
 2. Update documentation as needed
 3. Add or update tests for new functionality
 4. Fill out the PR template completely
@@ -158,8 +156,8 @@ test: Add tests for complex chained queries
 
 ### PR Checklist
 
-- [ ] Tests pass locally (`pytest tests.py`)
-- [ ] Code follows style guidelines (`black`, `flake8`)
+- [ ] Tests pass locally (`pytest ./tests`)
+- [ ] Code follows style guidelines (`task format`, `task lint`)
 - [ ] Documentation is updated
 - [ ] Examples are provided
 - [ ] Commit messages are clear

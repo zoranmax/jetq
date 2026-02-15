@@ -10,7 +10,7 @@ jetq/
 ├── __init__.py          - Package initialization and exports
 ├── queryable.py         - Main Queryable class with 50+ operators
 ├── query_provider.py    - Query provider implementation
-└── types.py            - Type definitions and utilities
+└── types.py             - Type definitions and utilities
 ```
 
 ### Documentation Files

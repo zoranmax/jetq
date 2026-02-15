@@ -1,0 +1,120 @@
+version: '3'
+
+tasks:
+  format:
+    desc: Format code with ruff
+    cmds:
+      - ruff format .
+      - ruff check --fix --select I .
+
+  lint:
+    desc: Run all linters (ruff and mypy)
+    cmds:
+      - task: lint:ruff
+      - task: lint:mypy
+
+  lint:ruff:
+    desc: Lint code with ruff
+    cmds:
+      - ruff check .
+
+  lint:mypy:
+    desc: Type check with mypy
+    cmds:
+      - mypy jetq --ignore-missing-imports
+
+  test:
+    desc: Run tests with pytest
+    cmds:
+      - pytest -v --cov=jetq --cov-report=term-missing
+
+  test:simple:
+    desc: Run tests without coverage
+    cmds:
+      - pytest -v
+
+  docker:test:
+    desc: Run tests on all Python versions using Docker
+    cmds:
+      - ./test-docker.sh --all
+
+  docker:test:3.8:
+    desc: Run tests on Python 3.8 in Docker
+    cmds:
+      - ./test-docker.sh 3.8
+
+  docker:test:3.9:
+    desc: Run tests on Python 3.9 in Docker
+    cmds:
+      - ./test-docker.sh 3.9
+
+  docker:test:3.10:
+    desc: Run tests on Python 3.10 in Docker
+    cmds:
+      - ./test-docker.sh 3.10
+
+  docker:test:3.11:
+    desc: Run tests on Python 3.11 in Docker
+    cmds:
+      - ./test-docker.sh 3.11
+
+  docker:test:3.12:
+    desc: Run tests on Python 3.12 in Docker
+    cmds:
+      - ./test-docker.sh 3.12
+
+  docker:test:3.13:
+    desc: Run tests on Python 3.13 in Docker
+    cmds:
+      - ./test-docker.sh 3.13
+
+  docker:build:
+    desc: Build all Docker test images
+    cmds:
+      - docker compose build
+
+  docker:shell:
+    desc: Open shell in Python container (use PY_VERSION variable, e.g., PY_VERSION=3.10 task docker:shell)
+    cmds:
+      - ./test-docker.sh --shell {{.PY_VERSION | default "3.11"}}
+
+  docker:clean:
+    desc: Clean up Docker containers and images
+    cmds:
+      - ./test-docker.sh --clean
+
+  build:
+    desc: Build distribution packages
+    cmds:
+      - python -m build
+
+  clean:
+    desc: Clean build artifacts and cache files
+    cmds:
+      - rm -rf build dist *.egg-info
+      - find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+      - find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
+      - find . -type d -name .mypy_cache -exec rm -rf {} + 2>/dev/null || true
+
+  install:
+    desc: Install package in development mode
+    cmds:
+      - pip install -e .
+
+  install:dev:
+    desc: Install development dependencies
+    cmds:
+      - pip install -r requirements-dev.txt
+
+  all:
+    desc: Run format, lint, test, and build
+    cmds:
+      - task: format
+      - task: lint
+      - task: test
+      - task: build
+
+  default:
+    desc: Show available tasks
+    cmds:
+      - task --list

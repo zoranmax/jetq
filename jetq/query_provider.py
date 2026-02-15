@@ -1,19 +1,21 @@
 """Query provider implementation for jetq."""
 
-from typing import Iterable, Iterator, TypeVar, Any
-from abc import ABC, abstractmethod
+from typing import Iterable, Iterator, TypeVar
 
-T = TypeVar('T')
+from jetq.queryable import Queryable
+
+T = TypeVar("T")
 
 
 class QueryProvider:
     """Default query provider for LINQ operations."""
-    
-    def create_query(self, iterable: Iterable[T]) -> 'Queryable[T]':
+
+    def create_query(self, iterable: Iterable[T]) -> Queryable[T]:
         """Create a queryable from an iterable."""
         from .queryable import Queryable
+
         return Queryable(iterable, self)
-    
+
     def execute_query(self, source: Iterable[T]) -> Iterator[T]:
         """Execute a query by iterating over the source."""
         return iter(source)

@@ -1,7 +1,6 @@
 # Requirements for development
 pytest>=6.0
 pytest-cov>=2.10
-black>=21.0
-flake8>=3.9
+ruff>=0.1.0
 mypy>=0.900
-isort>=5.0
+build>=0.7.0

@@ -112,19 +112,6 @@ result = query.to_list()  # Executed here
 - `to_dict()` - Convert to dictionary
 - `to_set()` - Convert to set
 
-## Architecture
-
-```
-jetq/
-├── __init__.py           # Package initialization
-├── queryable.py          # Main Queryable class
-├── enumerable.py         # Extension methods for built-in types
-├── providers/
-│   ├── __init__.py
-│   ├── query_provider.py # Abstract provider interface
-│   └── linq_provider.py  # Default LINQ provider
-└── types.py              # Type definitions and utilities
-```
 
 ## Contributing
 
