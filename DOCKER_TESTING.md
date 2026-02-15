@@ -6,6 +6,7 @@ This guide explains how to test jetq across multiple Python versions using Docke
 
 - Docker (version 20.10 or later)
 - docker-compose (version 1.29 or later)
+- [Task](https://taskfile.dev/) (optional, but recommended for easier command usage)
 
 ### Installing Docker
 
@@ -25,7 +26,62 @@ brew install --cask docker
 **Windows:**
 Download and install Docker Desktop from https://www.docker.com/products/docker-desktop
 
+### Installing Task (Optional, Recommended)
+
+**macOS:**
+```bash
+brew install go-task
+```
+
+**Linux:**
+```bash
+sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b ~/.local/bin
+```
+
+**Windows:**
+```powershell
+choco install go-task
+```
+
+Or download from https://taskfile.dev/installation/
+
 ## Quick Start
+
+### Using Task Runner (Recommended)
+
+If you have [Task](https://taskfile.dev/) installed, you can use these convenient commands:
+
+```bash
+# Run tests on all Python versions
+task docker:test
+
+# Run tests on a specific Python version
+task docker:test:3.8
+task docker:test:3.9
+task docker:test:3.10
+task docker:test:3.11
+task docker:test:3.12
+task docker:test:3.13
+
+# Build all Docker images
+task docker:build
+
+# Open interactive shell (defaults to Python 3.11)
+task docker:shell
+
+# Open shell with specific Python version
+PY_VERSION=3.10 task docker:shell
+
+# Clean up Docker resources
+task docker:clean
+
+# View all available Docker tasks
+task --list | grep docker
+```
+
+### Using test-docker.sh Script
+
+Alternatively, use the test script directly:
 
 ### 1. Run tests on all Python versions
 ```bash
@@ -59,22 +115,38 @@ Download and install Docker Desktop from https://www.docker.com/products/docker-
 
 ### Test on Python 3.8 (minimum supported version)
 ```bash
+# Using Task runner
+task docker:test:3.8
+
+# Or using test-docker.sh
 ./test-docker.sh 3.8
 ```
 
 ### Test on Python 3.12 (current stable)
 ```bash
+# Using Task runner
+task docker:test:3.12
+
+# Or using test-docker.sh
 ./test-docker.sh 3.12
 ```
 
 ### Build fresh images and test everything
 ```bash
+# Using Task runner
+task docker:build
+task docker:test
+
+# Or using test-docker.sh
 ./test-docker.sh --build --all
 ```
 
 ### Debug issues in Python 3.9
 ```bash
-# Open a shell in the Python 3.9 container
+# Open a shell in the Python 3.9 container (Task runner)
+PY_VERSION=3.9 task docker:shell
+
+# Or using test-docker.sh
 ./test-docker.sh --shell 3.9
 
 # Inside the container, run tests with more verbosity
@@ -156,6 +228,11 @@ docker-compose run --rm test-py38 pytest -vv --tb=long
 
 Update [requirements-dev.txt](requirements-dev.txt) and rebuild:
 ```bash
+# Using Task runner
+task docker:build
+task docker:test
+
+# Or using test-docker.sh
 ./test-docker.sh --build --all
 ```
 
@@ -189,6 +266,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
+      # Option 1: Using Task runner (requires Task installation)
+      - name: Install Task
+        run: |
+          sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
+      
+      - name: Build and test with Task
+        run: task docker:test:${{ matrix.python-version }}
+      
+      # Option 2: Using docker-compose directly
       - name: Build and test Python ${{ matrix.python-version }}
         run: |
           docker-compose build test-py${{ matrix.python-version }}
@@ -204,12 +290,19 @@ test:
   image: docker:latest
   services:
     - docker:dind
+  before_script:
+    # Optional: Install Task for cleaner commands
+    - apk add --no-cache curl sh
+    - sh -c "$(curl --location https://taskfile.dev/install.sh)" -- -d -b /usr/local/bin
   script:
-    - docker-compose run --rm test-py38
-    - docker-compose run --rm test-py39
-    - docker-compose run --rm test-py310
-    - docker-compose run --rm test-py311
-    - docker-compose run --rm test-py312
+    # Using Task runner
+    - task docker:test
+    # Or using docker-compose directly
+    # - docker-compose run --rm test-py38
+    # - docker-compose run --rm test-py39
+    # - docker-compose run --rm test-py310
+    # - docker-compose run --rm test-py311
+    # - docker-compose run --rm test-py312
 ```
 
 ## Troubleshooting
@@ -232,15 +325,24 @@ sudo systemctl start docker
 
 ### Build fails
 ```bash
-# Clean up and rebuild
+# Clean up and rebuild (Task runner)
+task docker:clean
+task docker:build
+task docker:test
+
+# Or using test-docker.sh
 ./test-docker.sh --clean
 ./test-docker.sh --build --all
 ```
 
 ### Tests pass locally but fail in Docker
 ```bash
-# Check for missing dependencies in requirements-dev.txt
+# Check for missing dependencies in requirements-dev.txt (Task runner)
+PY_VERSION=3.8 task docker:shell
+
+# Or using test-docker.sh
 ./test-docker.sh --shell 3.8
+
 # Inside container:
 pip list
 pytest -v
@@ -260,7 +362,13 @@ The Dockerfile is optimized for layer caching. Dependencies are installed before
 ### Parallel testing
 Run tests on multiple versions simultaneously:
 ```bash
-# In separate terminals
+# Using Task runner in separate terminals
+task docker:test:3.8 &
+task docker:test:3.9 &
+task docker:test:3.10 &
+wait
+
+# Or using test-docker.sh
 ./test-docker.sh 3.8 &
 ./test-docker.sh 3.9 &
 ./test-docker.sh 3.10 &
@@ -270,11 +378,16 @@ wait
 ### Using pre-built images
 After first build, subsequent runs are fast:
 ```bash
-# First time (builds images)
+# First time (builds images) - Task runner
+task docker:build  # Takes a few minutes
+task docker:test   # Run tests
+
+# Or using test-docker.sh
 ./test-docker.sh --build --all  # Takes a few minutes
 
 # Subsequent runs (uses cached images)
-./test-docker.sh --all  # Fast!
+task docker:test        # Fast! (Task runner)
+./test-docker.sh --all  # Fast! (test-docker.sh)
 ```
 
 ## Advanced Usage
@@ -298,7 +411,10 @@ docker-compose run --rm test-py38 pytest --pdb
 ### Interactive debugging
 
 ```bash
-# Start container with shell
+# Start container with shell (Task runner)
+PY_VERSION=3.8 task docker:shell
+
+# Or using test-docker.sh
 ./test-docker.sh --shell 3.8
 
 # Inside container:
@@ -309,6 +425,7 @@ ipython  # if installed
 
 ## Files Overview
 
+- **Taskfile.yml** - Task runner configuration with Docker test commands
 - **Dockerfile** - Multi-stage Dockerfile for building test images
 - **docker-compose.yml** - Orchestration for multiple Python versions
 - **.dockerignore** - Files excluded from Docker context
