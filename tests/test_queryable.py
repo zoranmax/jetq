@@ -491,4 +491,3 @@ class TestComplexQueries:
 
         engineering = next(r for r in result if r["dept"] == "Engineering")
         assert engineering["avg_salary"] == pytest.approx(82500)
-
