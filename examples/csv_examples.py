@@ -8,7 +8,7 @@ import csv
 import tempfile
 from pathlib import Path
 
-from jetq import from_csv
+from jetq import CsvQueryable, from_csv
 
 
 def create_sample_csv():
@@ -109,7 +109,9 @@ def example_1_basic_filtering():
 
     # Find all engineers
     engineers = (
-        from_csv(csv_path).where(lambda e: e["department"] == "Engineering").to_list()
+        CsvQueryable(csv_path)
+        .where(lambda e: e["department"] == "Engineering")
+        .to_list()
     )
 
     print(f"\nEngineers ({len(engineers)} found):")

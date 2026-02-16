@@ -104,7 +104,7 @@ class RestQueryProvider:
         # Execute HTTP GET request
 ```
 
-#### OData Query Provider (example)
+#### OData Query Provider (example) - Not yet available
 ```python
 class ODataQueryProvider:
     def translate_filter(self, expr):
@@ -112,7 +112,7 @@ class ODataQueryProvider:
         # x == "test" -> "$filter=x eq 'test'"
 ```
 
-#### SQL Query Provider (example)
+#### SQL Query Provider (example) - Not yet available
 ```python
 class SqlQueryProvider:
     def translate_filter(self, expr):
@@ -126,12 +126,13 @@ class SqlQueryProvider:
 - [x] Create expression classes
 - [x] Implement lambda parser using Python AST
 - [x] Create expression visitor base class
-- [ ] Add comprehensive unit tests
+- [x] Add comprehensive unit tests
 - [ ] Handle edge cases (closures, method calls, etc.)
 
 ### Phase 2: Query Provider Infrastructure
 - [x] Create REST query provider example
 - [ ] Extend Queryable to support expression-based providers
+    - Currently, expression-based execution is provided by specialized types like `RestQueryable` and `CsvQueryable`.
 - [ ] Implement query composition (combine multiple where clauses)
 - [ ] Add support for select(), order_by(), etc.
 
