@@ -10,6 +10,12 @@
 - [x] Provider pattern for extensibility
 - [x] Generic type support
 
+### Expression Trees
+- [x] Expression tree construction
+- [x] Expression tree evaluation
+- [x] Query provider translation
+- [x] Remote data source support (CSV, REST)
+
 ### Filtering Operators
 - [x] `where()` - Filter by predicate
 - [x] `distinct()` - Remove duplicates
@@ -117,14 +123,15 @@
 ## 📋 Partially Completed / Future Features
 
 ### Expression Trees
-- [ ] Expression tree construction
-- [ ] Expression tree evaluation
-- [ ] Query provider translation
-- [ ] Remote data source support
+- [x] Expression tree construction
+- [x] Expression tree evaluation
+- [x] Query provider translation
+- [x] Remote data source support (CSV, REST)
 
 ### Additional Providers
 - [ ] LINQ to SQL
-- [ ] LINQ to REST
+- [x] LINQ to REST
+- [x] LINQ to CSV
 - [ ] LINQ to XML
 - [ ] LINQ to JSON
 

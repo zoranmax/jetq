@@ -43,6 +43,35 @@ sorted_data = numbers.order_by(lambda x: -x).to_list()
 # Output: [5, 4, 3, 2, 1]
 ```
 
+## Provider Examples
+
+### CSV Queryable
+
+```python
+from jetq import CsvQueryable
+
+results = (
+    CsvQueryable("employees.csv", type_converters={"age": int, "salary": float})
+    .where(lambda r: r["age"] > 30)
+    .where(lambda r: r["salary"] > 80000)
+    .take(5)
+    .to_list()
+)
+```
+
+Full CSV examples are in [examples/csv_examples.py](examples/csv_examples.py).
+
+### REST Queryable
+
+```python
+from jetq import RestQueryable
+
+posts = RestQueryable("https://jsonplaceholder.typicode.com", "posts")
+result = posts.where(lambda p: p["userId"] == 1).take(3).to_list()
+```
+
+REST query translation details are documented in [EXPRESSION_TREES.md](EXPRESSION_TREES.md).
+
 ## Core Concepts
 
 ### Queryable vs Enumerable

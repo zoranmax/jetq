@@ -1,6 +1,6 @@
 [project]
 name = "jetq"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Python implementation of .NET's Language Integrated Query (LINQ), providing a functional, fluent API for querying and manipulating collections."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -9,6 +9,9 @@ dependencies = []
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
+markers = [
+    "integration: marks tests as integration tests (may require network access)",
+]
 
 [tool.ruff]
 line-length = 88

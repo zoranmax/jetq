@@ -21,7 +21,7 @@ tasks:
   lint:mypy:
     desc: Type check with mypy
     cmds:
-      - mypy jetq --ignore-missing-imports
+      - mypy jetq --ignore-missing-imports --check-untyped-defs
 
   test:
     desc: Run tests with pytest
@@ -95,6 +95,8 @@ tasks:
       - find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
       - find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
       - find . -type d -name .mypy_cache -exec rm -rf {} + 2>/dev/null || true
+      - find . -type d -name .ruff_cache -exec rm -rf {} + 2>/dev/null || true
+      - find . -type d -name .pytest_cache -exec rm -rf {} + 2>/dev/null || true
 
   install:
     desc: Install package in development mode
