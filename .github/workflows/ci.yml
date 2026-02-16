@@ -85,57 +85,10 @@ jobs:
           file: ./coverage.xml
           fail_ci_if_error: false
 
-  bump-version:
-    name: Bump Version
-    runs-on: ubuntu-latest
-    needs: [format-check, lint, test]
-    if: ${{ github.ref == 'refs/heads/main' && !contains(github.event.head_commit.message, '[skip ci]') }}
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Bump version
-        run: python scripts/bump_version.py
-
-      - name: Commit, tag, and push
-        run: |
-          if git diff --quiet; then
-            echo "No version change needed."
-            exit 0
-          fi
-
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pyproject.toml setup.py jetq/__init__.py
-          git commit -m "chore: bump version [skip ci]"
-          version=$(python -c "import re; data=open('pyproject.toml', encoding='utf-8').read(); m=re.search(r'^version\\s*=\\s*\"([^\"]+)\"$', data, re.M); print(m.group(1) if m else '')")
-          if [ -z "$version" ]; then
-            echo "Failed to read version from pyproject.toml"
-            exit 1
-          fi
-
-          tag="v$version"
-          if git rev-parse "$tag" >/dev/null 2>&1; then
-            echo "Tag $tag already exists."
-          else
-            git tag -a "$tag" -m "Release $tag"
-          fi
-
-          git push
-          git push --tags
-
   build:
     name: Build Package
     runs-on: ubuntu-latest
-    needs: [format-check, lint, test, bump-version]
+    needs: [format-check, lint, test]
     steps:
       - uses: actions/checkout@v4
       
