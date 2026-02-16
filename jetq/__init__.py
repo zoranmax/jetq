@@ -1,5 +1,6 @@
 """jetq - Python LINQ implementation."""
 
+from .csv_provider import CsvQueryable, CsvQueryProvider, from_csv
 from .expression_parser import LambdaParser, parse_lambda
 
 # Expression tree support (experimental)
@@ -38,4 +39,8 @@ __all__ = [
     "UnaryExpression",
     "parse_lambda",
     "LambdaParser",
+    # CSV provider support
+    "CsvQueryProvider",
+    "CsvQueryable",
+    "from_csv",
 ]

@@ -45,14 +45,34 @@ class LambdaParser:
             )
 
         # Parse the source code
-        tree = ast.parse(source.strip())
+        try:
+            tree = ast.parse(source.strip())
+        except SyntaxError:
+            candidate = None
+            if "lambda" in source:
+                for line in source.splitlines():
+                    if "lambda" in line:
+                        candidate = self._extract_lambda_from_line(line)
+                        if candidate:
+                            break
+
+            if candidate:
+                tree = ast.parse(candidate.strip())
+            else:
+                raise
 
         # Find the lambda or function definition
-        lambda_node = self._find_lambda(tree)
+        lambda_node = self._find_lambda(tree, func)
         if lambda_node is None:
             raise ValueError("No lambda or function definition found")
 
-        return self._parse_lambda(lambda_node)
+        if isinstance(lambda_node, ast.Lambda):
+            return self._parse_lambda(lambda_node)
+
+        if isinstance(lambda_node, ast.FunctionDef):
+            return self._parse_function(lambda_node)
+
+        raise ValueError("Unsupported callable node type")
 
     def _extract_lambda_from_line(self, line: str) -> Optional[str]:
         """Extract just the lambda expression from a line of code.
@@ -205,15 +225,66 @@ class LambdaParser:
 
         return None
 
-    def _find_lambda(self, node: ast.AST) -> Any:
-        """Find a lambda or function definition in the AST."""
+    def _find_lambda(
+        self, node: ast.AST, func: Optional[Callable] = None
+    ) -> Optional[ast.AST]:
+        """Find a lambda or function definition in the AST matching the function code."""
+        candidates: list[ast.AST] = []
         for child in ast.walk(node):
             if isinstance(child, ast.Lambda):
-                return child
-            if isinstance(child, ast.FunctionDef):
-                # For named functions, parse the body
-                return child
-        return None
+                candidates.append(child)
+            elif isinstance(child, ast.FunctionDef):
+                candidates.append(child)
+
+        if not candidates:
+            return None
+
+        # If no func provided or only one candidate, return first (simplest case)
+        if func is None or len(candidates) == 1:
+            return candidates[0]
+
+        try:
+            target_code = func.__code__
+        except AttributeError:
+            return candidates[0]
+
+        # Try to find exact bytecode match
+        for cand in candidates:
+            try:
+                if isinstance(cand, ast.FunctionDef):
+                    # Compile function definition
+                    module = ast.Module(body=[cand], type_ignores=[])
+                    ast.fix_missing_locations(module)
+                    code = compile(module, "<string>", "exec")
+                    glob: dict[str, Any] = {}
+                    exec(code, glob)
+                    func_from_ast = glob[cand.name]
+                elif isinstance(cand, ast.Lambda):
+                    # Compile lambda expression
+                    expr = ast.Expression(body=cand)
+                    ast.fix_missing_locations(expr)
+                    code = compile(expr, "<string>", "eval")
+                    func_from_ast = eval(code)
+                else:
+                    continue
+
+                cand_code = func_from_ast.__code__
+
+                # Check for match. We compare bytecode and constants.
+                # Note: This might fail for closures where variables are captured differently
+                # (LOAD_FAST vs LOAD_DEREF vs LOAD_GLOBAL), but works for pure lambdas.
+                if (
+                    cand_code.co_code == target_code.co_code
+                    and cand_code.co_consts == target_code.co_consts
+                ):
+                    return cand
+
+            except Exception:
+                continue
+
+        # Fallback: if no exact match found (e.g. due to closure differences),
+        # return the first candidate. Use deeper logic if needed.
+        return candidates[0]
 
     def _parse_lambda(self, node: ast.Lambda) -> LambdaExpression:
         """Parse a lambda AST node."""
@@ -225,6 +296,24 @@ class LambdaParser:
         # Parse body
         body = self._parse_expression(node.body)
 
+        return LambdaExpression(parameters, body)
+
+    def _parse_function(self, node: ast.FunctionDef) -> LambdaExpression:
+        """Parse a function definition AST node."""
+        parameters = []
+        for arg in node.args.args:
+            parameters.append(ParameterExpression(arg.arg))
+
+        return_node = None
+        for stmt in node.body:
+            if isinstance(stmt, ast.Return):
+                return_node = stmt
+                break
+
+        if return_node is None or return_node.value is None:
+            raise ValueError("Function must contain a return statement")
+
+        body = self._parse_expression(return_node.value)
         return LambdaExpression(parameters, body)
 
     def _parse_expression(self, node: ast.AST) -> Expression:
