@@ -21,7 +21,7 @@ tasks:
   lint:mypy:
     desc: Type check with mypy
     cmds:
-      - mypy jetq --ignore-missing-imports
+      - mypy jetq --ignore-missing-imports --check-untyped-defs
 
   test:
     desc: Run tests with pytest
