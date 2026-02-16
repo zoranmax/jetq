@@ -7,7 +7,7 @@ translating where/select/order operations into REST query parameters.
 import json
 import urllib.parse
 import urllib.request
-from typing import Any, Callable, Dict, Iterator, List, Optional, TypeVar
+from typing import Any, Callable, Dict, Iterator, List, Optional, TypeVar, Union
 
 from .expression_parser import parse_lambda
 from .expressions import (
@@ -130,8 +130,7 @@ class RestQueryProvider:
 
     def create_query(self, resource_path: str) -> "RestQueryable[Dict[str, Any]]":
         """Create a queryable for a REST resource."""
-        query_expr = QueryExpression(self.base_url, resource_path)
-        return RestQueryable(query_expr, self)
+        return RestQueryable(self, resource_path=resource_path)
 
     def execute_query(self, query_expr: QueryExpression) -> Iterator[Dict]:
         """Execute the query by making an HTTP request."""
@@ -185,14 +184,32 @@ class RestQueryable(Queryable[T]):
     expression that can be translated to REST API calls.
     """
 
-    def __init__(self, query_expr: QueryExpression, provider: RestQueryProvider):
-        self._query_expr = query_expr
-        self._provider = provider
+    def __init__(
+        self,
+        source: Union[str, RestQueryProvider],
+        resource_path: Optional[str] = None,
+        query_expr: Optional[QueryExpression] = None,
+    ):
+        if isinstance(source, RestQueryProvider):
+            self._provider = source
+        elif isinstance(source, str):
+            self._provider = RestQueryProvider(source)
+        else:
+            raise TypeError("Source must be a base URL string or RestQueryProvider")
+
+        if query_expr is not None:
+            self._query_expr = query_expr
+        else:
+            if resource_path is None:
+                raise ValueError(
+                    "resource_path is required when creating a RestQueryable"
+                )
+            self._query_expr = QueryExpression(self._provider.base_url, resource_path)
         self._executed = False
         self._results: Optional[List[T]] = None
 
         # Don't initialize with an iterable yet
-        super().__init__([], provider)
+        super().__init__([], self._provider)
 
     def where(self, predicate: Callable[[T], bool]) -> "RestQueryable[T]":
         """Add a filter condition by parsing the lambda."""
@@ -201,17 +218,17 @@ class RestQueryable(Queryable[T]):
         self._query_expr.add_filter(expr.body)
 
         # Return a new queryable with updated expression
-        return RestQueryable(self._query_expr, self._provider)
+        return RestQueryable(self._provider, query_expr=self._query_expr)
 
     def skip(self, count: int) -> "RestQueryable[T]":
         """Skip N records on the server."""
         self._query_expr.set_skip(count)
-        return RestQueryable(self._query_expr, self._provider)
+        return RestQueryable(self._provider, query_expr=self._query_expr)
 
     def take(self, count: int) -> "RestQueryable[T]":
         """Take N records from the server."""
         self._query_expr.set_take(count)
-        return RestQueryable(self._query_expr, self._provider)
+        return RestQueryable(self._provider, query_expr=self._query_expr)
 
     def __iter__(self) -> Iterator[T]:
         """Execute the query when enumerated."""
@@ -227,11 +244,10 @@ class RestQueryable(Queryable[T]):
 def example_rest_query():
     """Example of using REST query provider with expression trees."""
 
-    # Create a provider for JSONPlaceholder API
-    provider = RestQueryProvider("https://jsonplaceholder.typicode.com")
-
     # Create a queryable for posts
-    posts = provider.create_query("posts")
+    posts: RestQueryable[Dict[str, Any]] = RestQueryable(
+        "https://jsonplaceholder.typicode.com", "posts"
+    )
 
     print("Example 1: Filter by userId")
     print("-" * 50)

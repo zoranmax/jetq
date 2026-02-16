@@ -17,6 +17,7 @@ from .expressions import (
 )
 from .query_provider import QueryProvider
 from .queryable import OrderedQueryable, Queryable
+from .rest_provider import RestQueryable, RestQueryProvider
 from .types import GroupingResult
 
 __version__ = "0.1.0"
@@ -43,4 +44,6 @@ __all__ = [
     "CsvQueryProvider",
     "CsvQueryable",
     "from_csv",
+    "RestQueryProvider",
+    "RestQueryable",
 ]

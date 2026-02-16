@@ -28,11 +28,10 @@ With expression trees, jetq can:
 ### Example with REST API
 
 ```python
-from jetq.rest_provider import RestQueryProvider
+from jetq.rest_provider import RestQueryable
 
-# Create a REST provider
-provider = RestQueryProvider("https://jsonplaceholder.typicode.com")
-posts = provider.create_query("posts")
+# Create a queryable directly
+posts = RestQueryable("https://jsonplaceholder.typicode.com", "posts")
 
 # This translates to: GET /posts?userId=1
 result = posts.where(lambda p: p['userId'] == 1).to_list()
@@ -152,10 +151,9 @@ class SqlQueryProvider:
 
 ### Example 1: Basic REST Query
 ```python
-from jetq.rest_provider import RestQueryProvider
+from jetq.rest_provider import RestQueryable
 
-provider = RestQueryProvider("https://api.example.com")
-users = provider.create_query("users")
+users = RestQueryable("https://api.example.com", "users")
 
 # Single filter
 active_users = users.where(lambda u: u['active'] == True).to_list()
@@ -172,7 +170,6 @@ first_10 = users.skip(0).take(10).to_list()
 
 ### Example 2: Complex Query with Chaining
 ```python
-# Complex query
 result = (users
     .where(lambda u: u['age'] > 18)
     .where(lambda u: u['country'] == 'USA')
